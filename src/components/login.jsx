@@ -29,8 +29,18 @@ const LoginForm = () => {
           if (res.data.message === "Success") {
             setLoader(false);
             alert("Login Successful");
-            // window.localStorage.setItem("Username", res.data.user.Name);
-            // navigate("/");
+            window.localStorage.setItem("InvertrekUsername", res.data.user.Name);
+            window.localStorage.setItem("InvertrekuserRole",res.data.user.userRole)
+            window.localStorage.setItem("InvertrekUserDepartment",res.data.user.Department)
+
+            if(userRole==="Admin"){
+
+              navigate("/admindashboard");
+            }
+            if(userRole==="Department Staff"){
+              navigate('/userdashboard')
+            }
+            window.location.reload();
           } else {
             setError(res.data);
             setLoader(false);
@@ -139,13 +149,7 @@ const LoginForm = () => {
           <span className="text-red-600 text-xs">{Error}</span>
         </div>
 
-        {/* Sign Up Link */}
-        <p className="text-center text-sm text-[#1A1A1D]">
-          Don't have an account?{" "}
-          <a href="/signup" className="font-medium text-[#3C552D] hover:text-blue-500">
-            Sign Up
-          </a>
-        </p>
+        
       </form>
     </div>
   );
